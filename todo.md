@@ -7,7 +7,8 @@
 - [x] Set up app icon assets (icon.png, splash-icon.png, favicon.png, android icons)
 
 ## Phase 2: Navigation & Tab Structure
-- [ ] Set up tab bar with all categories (Home, Articles, Poems, Stories, Videos, Podcasts, Books, More)
+- [x] Remove Home tab from navigation
+- [x] Set WebView as root screen
 - [ ] Add icon mappings for each tab
 - [ ] Create basic screen components for each category
 - [ ] Implement tab navigation routing
