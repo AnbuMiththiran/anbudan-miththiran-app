@@ -1,11 +1,17 @@
-import { Platform, View, ScrollView, Text, TouchableOpacity, Linking } from "react-native";
+import { Platform, View, ScrollView, Text, TouchableOpacity, Linking, ActivityIndicator } from "react-native";
 import { WebView } from "react-native-webview";
 import { ScreenContainer } from "@/components/screen-container";
+import { LoadingSpinner } from "@/components/loading-spinner";
+import { useState } from "react";
+import { useColors } from "@/hooks/use-colors";
 
 /**
  * Root Screen - Displays the Anbudan Miththiran website directly
  */
 export default function RootScreen() {
+  const [isLoading, setIsLoading] = useState(true);
+  const colors = useColors();
+
   const handleOpenWebsite = () => {
     Linking.openURL("https://www.anbumiththiran.in");
   };
@@ -34,9 +40,26 @@ export default function RootScreen() {
     );
   }
 
-  // On native platforms, use WebView
+  // On native platforms, use WebView with loading animation
   return (
     <View style={{ flex: 1 }}>
+      {isLoading && (
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: colors.background,
+            zIndex: 1000,
+          }}
+        >
+          <ActivityIndicator size="large" color={colors.primary} />
+        </View>
+      )}
       <WebView
         source={{ uri: "https://www.anbumiththiran.in" }}
         style={{ flex: 1 }}
@@ -44,6 +67,19 @@ export default function RootScreen() {
         scalesPageToFit={true}
         javaScriptEnabled={true}
         domStorageEnabled={true}
+        onLoadEnd={() => setIsLoading(false)}
+        renderLoading={() => (
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: colors.background,
+            }}
+          >
+            <ActivityIndicator size="large" color={colors.primary} />
+          </View>
+        )}
       />
     </View>
   );
