@@ -52,7 +52,6 @@
 - [ ] Implement fallback for web-only features
 
 ## Phase 9: Testing & Optimization
-- [x] Add loading animation on app open
 - [ ] Test all user flows end-to-end
 - [ ] Test on iOS and Android
 - [ ] Optimize performance
